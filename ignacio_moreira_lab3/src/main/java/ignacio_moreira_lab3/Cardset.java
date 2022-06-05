@@ -7,19 +7,18 @@ package ignacio_moreira_lab3;
 
 import java.util.ArrayList;
 
-
 public class Cardset {
     int E;
     ArrayList <Carta> cartas = new ArrayList<>();
     
     public Cardset(int E) {
-        ArrayList <Carta> Cartas= new ArrayList<>();
+        //ArrayList <Carta> cartas= new ArrayList<>();
         Carta primeracarta = new Carta();
         int i, j, k;
         for (i = 1; i<= E+1; i++) {
             primeracarta.getcarta().add(i);
         }
-        Cartas.add(primeracarta);
+        cartas.add(primeracarta);
         
         for (j=1; j<=E; j++) {
             Carta ncartas = new Carta();
@@ -28,8 +27,8 @@ public class Cardset {
             for (k=1; k<=E; k++) {
                 ncartas.getcarta().add(E * j + (k+1));
             }
-            Cartas.add(ncartas);
-            ncartas.getcarta().clear();
+            cartas.add(ncartas);
+            //ncartas.getcarta().clear();
         }
         for (i= 1; i<=E; i++) {
             for (j=1; j<=E; j++){
@@ -39,8 +38,8 @@ public class Cardset {
                 for (k=1; k<= E; k++) {
                     nncartas.getcarta().add(E+2+E*(k-1)+(((i-1)*(k-1)+j-1)%E));
                 }
-                Cartas.add(nncartas);
-                nncartas.getcarta().clear();
+                cartas.add(nncartas);
+                //nncartas.getcarta().clear();
             }
         }
     }
@@ -49,13 +48,34 @@ public class Cardset {
         return this.cartas;
     }
     
-
-     public String tostring(){
-        ArrayList<String> cartas_string = new ArrayList<>();         //se crea arreglo vacio
-        for(Integer i =0; i<this.cartas.size(); i++){
-            cartas_string.add(this.cartas.get(i).toString());         //se  transforman los atributos en string y se agregan al carta_string
+    public Carta nthcard(Integer n){
+        return this.cartas.get(n);
+    }
+    
+    public Integer numcard(){
+        return this.cartas.size();
+    }
+    
+    public void borrar_carta(Carta n){
+        this.cartas.remove(n);
+    }
+    
+    public void missingcard(Cardset cs1){
+        Carta c1 = cs1.nthcard(1);
+        Integer largo = c1.largo() - 1;
+        Cardset cs2 = new Cardset(largo);
+        for(Integer i = 0; i < cs2.numcard(); i++){
+            cs2.borrar_carta(cs1.nthcard(i));
         }
-        String cartaa = String.join("-", cartas_string);             // junta los string y despues los separa con un "-"
+    }
+
+     public String cardset_string(){
+        ArrayList<String> carta_string = new ArrayList<>();
+        for(Integer i =0; i<this.cartas.size(); i++){
+            Carta carta1 = this.cartas.get(i);
+            carta_string.add(carta1.cartatostring()); 
+            }
+        String cartaa = String.join(" / ", carta_string); 
         return cartaa;
     } 
 }

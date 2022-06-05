@@ -19,8 +19,8 @@ public class Main {
        c1.getcarta().add(33);
        c1.getcarta().add(545);
        
-       System.out.println(c1.tostring());
-       System.out.println(cs1.tostring());
+       System.out.println(c1.cartatostring());
+       System.out.println(cs1.cardset_string());
     }
     
 }

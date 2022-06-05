@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Carta {
-     ArrayList<Integer> carta = new ArrayList<>();
+    ArrayList<Integer> carta = new ArrayList<>();
     
     //constructor
     public Carta() {
@@ -14,7 +14,23 @@ public class Carta {
     public ArrayList<Integer> getcarta(){
         return this.carta;
     }
-    public String tostring(){
+    
+    public Integer findtotalcards(){
+        Integer n = this.carta.size() - 1;
+        return n*n + n + 1;
+    }
+    
+    public Integer requiredelements(){
+        Integer n = this.carta.size() - 1;
+        return n*n + n + 1;
+    }
+    
+    public Integer largo(){
+        return this.carta.size();
+    }
+    
+    
+    public String cartatostring(){
         ArrayList<String> carta_string = new ArrayList<>();         //se crea arreglo vacio
         for(Integer i =0; i<this.carta.size(); i++){
             carta_string.add(this.carta.get(i).toString());         //se  transforman los atributos en string y se agregan al carta_string
@@ -22,4 +38,5 @@ public class Carta {
         String cartaa = String.join("-", carta_string);             // junta los string y despues los separa con un "-"
         return cartaa;
     }
+           
 }
