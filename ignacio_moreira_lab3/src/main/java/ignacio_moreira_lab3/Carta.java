@@ -29,6 +29,15 @@ public class Carta {
         return this.carta.size();
     }
     
+    public ArrayList transformar(ArrayList<String> e){
+        ArrayList aux = new ArrayList<> ();
+        for(Integer i =0; i<this.carta.size(); i++){
+            Integer cambio = this.carta.get(i);
+            aux.add(e.get(cambio));
+        }
+        return aux;
+    }
+    
     
     public String cartatostring(){
         ArrayList<String> carta_string = new ArrayList<>();         //se crea arreglo vacio
