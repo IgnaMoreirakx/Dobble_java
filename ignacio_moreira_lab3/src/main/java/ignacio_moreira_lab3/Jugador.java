@@ -15,21 +15,28 @@ public class Jugador {
     Integer score;
     Boolean turno;
 
-    public Jugador(String nombre, Boolean turno) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.score = 0;
-        this.turno = turno;
     }
-    public String getnombre(Jugador j1){
-        return j1.nombre;
+    public String getNombre() {
+        return nombre;
     }
-    
-    public Integer getscore(Jugador j1){
-        return j1.score;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    
-    // se le suma un punto al jugador cuando corresponde
-    public Integer setscore(Jugador j1){
-        return j1.getscore(j1) + 1;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{" + "nombre=" + nombre + ", score=" + score + '}';
     }
 }

@@ -11,7 +11,7 @@ public class Cardset {
     int E;
     ArrayList <Carta> cartas = new ArrayList<>();
     
-    public Cardset(int E) {
+    public Cardset(int E, int C) {
         //ArrayList <Carta> cartas= new ArrayList<>();
         Carta primeracarta = new Carta();
         int i, j, k;
@@ -42,6 +42,11 @@ public class Cardset {
                 //nncartas.getcarta().clear();
             }
         }
+        ArrayList<Carta> cartas_finales= new ArrayList<>();
+        for (i= 0; i<C; i++){
+            cartas_finales.add(cartas.get(i));
+        }
+        cartas = cartas_finales;
     }
     
     public ArrayList<Carta> getcartas(){
@@ -63,7 +68,7 @@ public class Cardset {
     public void missingcard(Cardset cs1){
         Carta c1 = cs1.nthcard(1);
         Integer largo = c1.largo() - 1;
-        Cardset cs2 = new Cardset(largo);
+        Cardset cs2 = new Cardset(largo, (largo-1 + largo-1 +largo-1 +1));
         for(Integer i = 0; i < cs2.numcard(); i++){
             cs2.borrar_carta(cs1.nthcard(i));
         }

@@ -13,14 +13,19 @@ public class Main {
 
     
     public static void main(String[] args) {
-       Cardset cs1 = new Cardset(3);
-       Carta c1 = new Carta();
-       c1.getcarta().add(2);
-       c1.getcarta().add(33);
-       c1.getcarta().add(545);
+       Cardset cs1 = new Cardset(3, 8);
+       Areajuego a1 = new Areajuego();
+       Jugador j1 = new Jugador("ignacio");
+       Jugador j2 = new Jugador("feniaa");
+       Game g1 = new Game(2, cs1, a1, "iniciado", "bb");
+       g1.register(j1);
+       g1.register(j2);
+       g1.iniciarjuego();
+   
+       //System.out.println(cs1.cardset_string());
+       System.out.println(g1.toString());
        
-       System.out.println(c1.cartatostring());
-       System.out.println(cs1.cardset_string());
+       //System.out.println(c1.transformar(simbolos));
     }
     
 }
