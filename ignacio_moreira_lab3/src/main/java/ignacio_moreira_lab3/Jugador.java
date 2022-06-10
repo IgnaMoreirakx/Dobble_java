@@ -5,20 +5,16 @@
  */
 package ignacio_moreira_lab3;
 
-/**
- *
- * @author ignac
- */
 public class Jugador {
     //atributos
     String nombre;
     Integer score;
-    Boolean turno;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.score = 0;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -31,12 +27,13 @@ public class Jugador {
         return score;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
+    public void setScore() {
+        this.score = this.score + 1;
     }
 
     @Override
     public String toString() {
         return "Jugador{" + "nombre=" + nombre + ", score=" + score + '}';
     }
+    
 }

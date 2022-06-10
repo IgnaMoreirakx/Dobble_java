@@ -7,10 +7,6 @@ package ignacio_moreira_lab3;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author ignac
- */
 public class Areajuego {
     // atributo
     ArrayList<Carta> area = new ArrayList<>();
@@ -18,12 +14,13 @@ public class Areajuego {
     public Areajuego() {
         
     }
-    public ArrayList<Carta> agregarcartas(Cardset cs){
-        area.add(cs.nthcard(0));
-        area.add(cs.nthcard(1));
+    public ArrayList agregarcartas(Cardset cs){
+        this.area.add(cs.nthcard(0));
+        this.area.add(cs.nthcard(1));
+        
         cs.borrar_carta(cs.nthcard(0));
         cs.borrar_carta(cs.nthcard(1));
-        return area;
+        return this.area;
     }
     
     public ArrayList<Carta> eliminarcartas(){
@@ -37,7 +34,16 @@ public class Areajuego {
             Carta carta1 = this.area.get(i);
             area_string.add(carta1.cartatostring()); 
             }
-        String areaa = String.join("  ", area_string); 
+        String areaa = String.join("   ", area_string); 
         return areaa;
     }
+
+    public ArrayList<Carta> getArea() {
+        return area;
+    }
+    
+    public Carta obtenercarta(int i){
+        return area.get(i);
+    }
+    
 }

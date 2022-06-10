@@ -7,10 +7,8 @@ package ignacio_moreira_lab3;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author ignac
- */
+
+
 public class Game {
     //atributos
     Integer num_jugadores;
@@ -19,6 +17,7 @@ public class Game {
     Areajuego area;
     String estado;
     String modo;
+
 
     public Game(Integer num_jugadores, Cardset mazo, Areajuego area, String estado, String modo) {
         this.jugadores = new ArrayList<>();
@@ -39,19 +38,49 @@ public class Game {
         area.agregarcartas(mazo);
     }
     
-/*    
-    public String devolver(){
-        String s = "";
-        for(Integer i = 0; i < jugadores.size(); i++){
-            s += jugadores.get(i).toString();
+    
+
+    public void spotit(String elemento){
+        if(area.obtenercarta(0).getcarta().contains(elemento)){
+            if(area.obtenercarta(1).getcarta().contains(elemento)){
+                area.eliminarcartas();
+                area.agregarcartas(mazo);
+                Jugador j1= jugadores.get(0);
+                j1.setScore();
+                cambiarturno();
+             
+                
+                
+            }
+            else{
+                cambiarturno();
+            }
         }
-        return s;
+        else{
+            cambiarturno();
+        }
     }
-*/
+    
+    public void pass(){
+        cambiarturno();
+    }
+    
+    
+    public void cambiarturno(){
+        Jugador j1= jugadores.get(0);
+        jugadores.remove(0);
+        Integer largo = jugadores.size();
+        jugadores.add(largo, j1);
+    }
+
+    
+    
     @Override
     public String toString() {
-        String si = mazo.cardset_string();
+        Integer cantidad_cartas= mazo.getcartas().size();
+        String mazo2 = mazo.cardset_string();
         String area2 = area.areat_string();
-        return "Game{ jugadores=" + jugadores + ", mazo=" + si + ", area=" + area2 + ", estado=" + estado + ", modo=" + modo + '}';
+        return "Game{ jugadores=" + jugadores + ", numeros de cartas en el mazo=" + cantidad_cartas + ", area=" + area2 + ", estado=" + estado + ", modo=" + modo + '}';
     }
+    
 }

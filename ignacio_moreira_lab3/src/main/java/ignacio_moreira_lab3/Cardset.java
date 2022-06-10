@@ -11,34 +11,39 @@ public class Cardset {
     int E;
     ArrayList <Carta> cartas = new ArrayList<>();
     
-    public Cardset(int E, int C) {
-        //ArrayList <Carta> cartas= new ArrayList<>();
+    public Cardset(int E, int C, ArrayList<String> simbolos) {
+        ArrayList<Integer> c1aux = new ArrayList<>();
         Carta primeracarta = new Carta();
         int i, j, k;
         for (i = 1; i<= E+1; i++) {
-            primeracarta.getcarta().add(i);
+            String aux = simbolos.get(i);
+            primeracarta.getcarta().add(aux);
+
         }
         cartas.add(primeracarta);
+
         
         for (j=1; j<=E; j++) {
             Carta ncartas = new Carta();
-            ncartas.getcarta().add(1);
+            ncartas.getcarta().add(simbolos.get(1));
     
             for (k=1; k<=E; k++) {
-                ncartas.getcarta().add(E * j + (k+1));
+                String aux2 = simbolos.get(E * j + (k+1));
+                ncartas.getcarta().add(aux2);
             }
             cartas.add(ncartas);
+
             //ncartas.getcarta().clear();
         }
         for (i= 1; i<=E; i++) {
             for (j=1; j<=E; j++){
                 Carta nncartas = new Carta();
-                nncartas.getcarta().add(i+1);
-        
+                nncartas.getcarta().add(simbolos.get(i+1));
                 for (k=1; k<= E; k++) {
-                    nncartas.getcarta().add(E+2+E*(k-1)+(((i-1)*(k-1)+j-1)%E));
+                    nncartas.getcarta().add(simbolos.get(E+2+E*(k-1)+(((i-1)*(k-1)+j-1)%E)));
                 }
                 cartas.add(nncartas);
+
                 //nncartas.getcarta().clear();
             }
         }
@@ -47,11 +52,15 @@ public class Cardset {
             cartas_finales.add(cartas.get(i));
         }
         cartas = cartas_finales;
+       
+           
     }
     
     public ArrayList<Carta> getcartas(){
         return this.cartas;
     }
+    
+
     
     public Carta nthcard(Integer n){
         return this.cartas.get(n);
@@ -65,6 +74,7 @@ public class Cardset {
         this.cartas.remove(n);
     }
     
+    /*
     public void missingcard(Cardset cs1){
         Carta c1 = cs1.nthcard(1);
         Integer largo = c1.largo() - 1;
@@ -73,7 +83,8 @@ public class Cardset {
             cs2.borrar_carta(cs1.nthcard(i));
         }
     }
-
+*/
+    
      public String cardset_string(){
         ArrayList<String> carta_string = new ArrayList<>();
         for(Integer i =0; i<this.cartas.size(); i++){
