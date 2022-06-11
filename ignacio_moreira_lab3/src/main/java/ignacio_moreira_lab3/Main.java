@@ -34,6 +34,7 @@ public class Main {
        c1.getcarta().add("hola");
        c1.getcarta().add("chao");
        
+       
        Areajuego a1 = new Areajuego();
        
        Jugador j1 = new Jugador("ignacio");
@@ -48,9 +49,16 @@ public class Main {
        g1.iniciarjuego();
        g1.spotit("gato");
        g1.pass();
+       g1.pass();
+       g1.pass();
+       g1.pass();
+       g1.pass();
+       g1.pass();
+       //g1.finish();
        
        System.out.println(cs1.cardset_string());
        System.out.println(c1.cartatostring());
+       System.out.println(g1.dequieneselturno());
        System.out.println(g1.toString());
     }
 }

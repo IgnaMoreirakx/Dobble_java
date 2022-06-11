@@ -36,4 +36,9 @@ public class Jugador {
         return "Jugador{" + "nombre=" + nombre + ", score=" + score + '}';
     }
     
+    //un jugador sera igual al otro si y solo si tienen el mismo nombre
+    public Boolean equals(Jugador j){
+        return nombre.equals(j.getNombre());
+    }
+    
 }

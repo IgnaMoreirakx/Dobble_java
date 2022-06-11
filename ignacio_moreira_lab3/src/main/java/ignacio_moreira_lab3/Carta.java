@@ -45,5 +45,11 @@ public class Carta {
         String cartaa = String.join("-", carta_string);             // junta los string y despues los separa con un "-"
         return cartaa;
     }
+    
+    
+
+    public Boolean equals(Carta c1){
+       return carta.equals(c1.getcarta());
+    }
            
 }

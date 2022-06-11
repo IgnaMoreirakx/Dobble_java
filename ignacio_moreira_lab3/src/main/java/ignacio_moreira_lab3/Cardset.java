@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Cardset {
     int E;
+    ArrayList<String> simbolos;
     ArrayList <Carta> cartas = new ArrayList<>();
     
     public Cardset(int E, int C, ArrayList<String> simbolos) {
@@ -59,8 +60,19 @@ public class Cardset {
     public ArrayList<Carta> getcartas(){
         return this.cartas;
     }
+    public ArrayList<String> getsimbolos(){
+        return this.simbolos;
+    }
     
-
+    /*
+    public ArrayList<Carta> transformar_cartas(ArrayList<String> simbolos){
+        ArrayList aux = new ArrayList<>();
+        for(Integer i =0; i< cartas.size(); i++){
+            aux.add(cartas.get(i).transformar(simbolos));
+        }
+        return aux;
+    }
+    */
     
     public Carta nthcard(Integer n){
         return this.cartas.get(n);
@@ -93,5 +105,16 @@ public class Cardset {
             }
         String cartaa = String.join(" / ", carta_string); 
         return cartaa;
-    } 
+    }
+     
+     public Boolean equals(Cardset cs1){
+         for(Integer i = 0; i<cartas.size();i++){
+             if(cartas.get(i).equals(cs1.getcartas().get(i)));
+             else{
+                 return false;
+             }
+         }
+         Boolean resultado = simbolos.equals(cs1.getsimbolos()) & cartas.size() == cs1.getcartas().size();
+        return resultado; 
+     }
 }
