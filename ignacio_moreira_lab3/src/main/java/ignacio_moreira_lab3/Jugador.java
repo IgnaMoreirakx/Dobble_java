@@ -33,7 +33,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", score=" + score + '}';
+        return nombre + "\r con "+ " " + score + " " + "puntos";
     }
     
     //un jugador sera igual al otro si y solo si tienen el mismo nombre

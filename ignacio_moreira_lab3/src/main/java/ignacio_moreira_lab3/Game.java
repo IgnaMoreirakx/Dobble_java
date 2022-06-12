@@ -47,10 +47,13 @@ public class Game {
         if(area.obtenercarta(0).getcarta().contains(elemento)){
             if(area.obtenercarta(1).getcarta().contains(elemento)){
                 area.eliminarcartas();
-                area.agregarcartas(mazo);
                 Jugador j1= jugadores.get(0);
                 j1.setScore();
                 cambiarturno();
+                area.agregarcartas(mazo);
+                if(area.getArea().size()< 2){
+                    finish();
+                }
              
                 
                 
@@ -114,9 +117,10 @@ public class Game {
         String area2 = area.areat_string();
         ArrayList<String> nombrej= new ArrayList<>();
         for(Integer i = 0; i<jugadores.size();i++){
-            nombrej.add(jugadores.get(i).getNombre());
-        }
-        return "Game{ jugadores=" + nombrej + ", numeros de cartas en el mazo=" + cantidad_cartas + ", Cartas sobre el area= " + area2 + ", estado=" + estado + ", modo=" + modo + ", " +resultado + '}';
+            nombrej.add(jugadores.get(i).toString());
+            }
+        String jugadoresstring = String.join("\r\n", nombrej);
+        return jugadoresstring + "\r\nNUMERO DE CARTAS EN EL MAZO: " + cantidad_cartas + "\r\nCARTAS SOBRE EL AREA: " + area2 + "\r\nESTADO: " + estado + "\r\nMODO: " + modo + "\r\n" +resultado ;
     }
     
 }

@@ -34,7 +34,7 @@ public class Areajuego {
             Carta carta1 = this.area.get(i);
             area_string.add(carta1.cartatostring()); 
             }
-        String areaa = String.join("   ", area_string); 
+        String areaa = String.join("\r\n", area_string); 
         return areaa;
     }
 
