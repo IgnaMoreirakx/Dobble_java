@@ -6,6 +6,7 @@
 package ignacio_moreira_lab3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Cardset {
     int E;
@@ -13,6 +14,7 @@ public class Cardset {
     ArrayList <Carta> cartas = new ArrayList<>();
     
     public Cardset(int E, int C, ArrayList<String> simbolos) {
+        this.E = E;
         ArrayList<Integer> c1aux = new ArrayList<>();
         Carta primeracarta = new Carta();
         int i, j, k;
@@ -53,26 +55,17 @@ public class Cardset {
             cartas_finales.add(cartas.get(i));
         }
         cartas = cartas_finales;
-       
+        Collections.shuffle(cartas);
            
     }
     
     public ArrayList<Carta> getcartas(){
         return this.cartas;
     }
+    
     public ArrayList<String> getsimbolos(){
         return this.simbolos;
     }
-    
-    /*
-    public ArrayList<Carta> transformar_cartas(ArrayList<String> simbolos){
-        ArrayList aux = new ArrayList<>();
-        for(Integer i =0; i< cartas.size(); i++){
-            aux.add(cartas.get(i).transformar(simbolos));
-        }
-        return aux;
-    }
-    */
     
     public Carta nthcard(Integer n){
         return this.cartas.get(n);
@@ -86,16 +79,17 @@ public class Cardset {
         this.cartas.remove(n);
     }
     
-    /*
+  /*
     public void missingcard(Cardset cs1){
         Carta c1 = cs1.nthcard(1);
         Integer largo = c1.largo() - 1;
-        Cardset cs2 = new Cardset(largo, (largo-1 + largo-1 +largo-1 +1));
+        Cardset cs2 = new Cardset(largo, (largo-1 + largo-1 +largo-1 +1, simbolos);
         for(Integer i = 0; i < cs2.numcard(); i++){
             cs2.borrar_carta(cs1.nthcard(i));
         }
     }
 */
+
     
      public String cardset_string(){
         ArrayList<String> carta_string = new ArrayList<>();
@@ -117,4 +111,38 @@ public class Cardset {
          Boolean resultado = simbolos.equals(cs1.getsimbolos()) & cartas.size() == cs1.getcartas().size();
         return resultado; 
      }
+     
+     
+     public boolean isdobble(){
+       return isPrime(E) & !serepite();          
+     }
+
+
+     
+     public boolean serepite(){
+         ArrayList<String> aux = new ArrayList<>();
+         for(Integer i = 0; i < cartas.size(); i++){
+             for(Integer j = i +1; j < cartas.size(); j++){
+                 aux = cartas.get(i).encomun(cartas.get(j));
+                 if(aux.size() > 1){
+                     return true;
+                 }
+                 else{
+                     aux.clear();
+                 }
+             }
+         }
+         return !(aux.isEmpty());
+     }
+     
+    boolean isPrime(int n) {
+        if(n ==2) return true;
+        if (n%2==0) return false;
+        
+        for(int i=3;i*i<=n;i+=2) {
+            if(n%i==0)
+                return false;
+        }
+        return true;
+    }
 }

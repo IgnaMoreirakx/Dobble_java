@@ -51,5 +51,15 @@ public class Carta {
     public Boolean equals(Carta c1){
        return carta.equals(c1.getcarta());
     }
+    
+    public ArrayList<String> encomun(Carta c){
+        ArrayList<String> resultado = new ArrayList<>();
+        for(Integer i = 0; i< carta.size(); i++){
+            if(carta.contains(c.getcarta().get(i))){
+               resultado.add((c.getcarta().get(i)));
+            }
+        }
+        return resultado;
+    }
            
 }

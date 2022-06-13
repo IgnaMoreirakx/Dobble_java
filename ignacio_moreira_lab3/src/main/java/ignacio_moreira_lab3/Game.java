@@ -7,6 +7,7 @@ package ignacio_moreira_lab3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 
 
@@ -38,7 +39,10 @@ public class Game {
     }
     
     public void iniciarjuego(){
-        area.agregarcartas(mazo);
+        area.getArea().add(mazo.nthcard(0));
+        area.getArea().add(mazo.nthcard(1));
+        mazo.borrar_carta(mazo.nthcard(0));
+        mazo.borrar_carta(mazo.nthcard(0));
     }
     
     
@@ -47,11 +51,13 @@ public class Game {
         if(area.obtenercarta(0).getcarta().contains(elemento)){
             if(area.obtenercarta(1).getcarta().contains(elemento)){
                 area.eliminarcartas();
+                System.out.println(area.areat_string());
                 Jugador j1= jugadores.get(0);
                 j1.setScore();
                 cambiarturno();
                 area.agregarcartas(mazo);
-                if(area.getArea().size()< 2){
+                
+                if(area.getArea().size() < 2){
                     finish();
                 }
              
@@ -93,7 +99,7 @@ public class Game {
         if(ganadores.size() >1){
             return "empate";
         }
-        return "ganador: " + ganadores.get(0).getNombre();
+        return "GANADOR: " + ganadores.get(0).getNombre();
     }
     
     
@@ -106,6 +112,27 @@ public class Game {
     
     public String dequieneselturno(){
         return jugadores.get(0).getNombre();
+    }
+    
+    public void contracpu(){
+        Random posrandom = new Random();
+        Integer pos= posrandom.nextInt(10);
+        if(area.getArea().isEmpty()){
+            finish();
+        }
+        if(pos%2 == 0){
+            String simbolo = area.getArea().get(0).encomun(area.getArea().get(1)).get(0);
+            System.out.println(simbolo);
+            spotit(simbolo);
+        }
+        else{
+            Random posrandom2 = new Random();
+            Integer pos2= posrandom.nextInt(area.getArea().size());
+            ArrayList<String> elementos = area.getArea().get(pos2).getcarta();
+            String simbolo = elementos.get(pos2);
+            System.out.println(simbolo);
+            spotit(simbolo);
+        }   
     }
 
     

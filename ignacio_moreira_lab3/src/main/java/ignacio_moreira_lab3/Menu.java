@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 
 public class Menu {
-     Cardset cs;
+    Cardset cs;
     Game game;
     Scanner s = new Scanner(System.in);
     private boolean salir = false;
@@ -38,30 +38,26 @@ public class Menu {
                 cs = crearmazo();
                 
                 System.out.println("Elija una opcion: \n");
-                System.out.println("1. registrar jugadores");
-                System.out.println("2. salir\n");
+                System.out.println("1. Partida entre amigos");
+                System.out.println("2. Partida contra la cpu");
+                System.out.println("3. Salir\n");
                 int opcionaux = s.nextInt();
                 switch(opcionaux){
                     case 1:
                         game = crearpartida();
-                        System.out.println("El juego actual es: "+ game.toString());
-                        
-                        System.out.println("Elija una opcion: \n");
-                        System.out.println("1. iniciar partida");
-                        System.out.println("\n 2. salir");
-                        opcionaux = s.nextInt();
-                        switch(opcionaux){
-                            case 1:
-                                game.iniciarjuego();
-                                System.out.println(game.area.areat_string());
-                                menujugar();
-                                break;
-                            case 2:
-                                salir=true;      
-                        }
+                        game.iniciarjuego();
+                        System.out.println("\nEl juego actual es: "+ game.toString());
+                        menujugar();
                         salir = true;
                         break;
                     case 2:
+                        game = modocpu();
+                        game.iniciarjuego();
+                        System.out.println("\nEl juego actual es: "+ game.toString());
+                        menucpu();
+                        salir = true;
+                        break;
+                    case 3:
                         salir = true;
                         break;
                 }
@@ -77,14 +73,15 @@ public class Menu {
     private Cardset crearmazo(){
         Scanner sn = new Scanner(System.in);
         ArrayList<String> simbolos = new ArrayList<>();
+        simbolos.add("");
         System.out.println("cuantos simbolos por elementos quiere en cada carta: ");
         Integer nume = sn.nextInt();
         Integer numero_orden = nume-1;
         System.out.println("cuantas cartas quiere del mazo, no pueden ser mas de "+ (numero_orden*numero_orden + numero_orden +1) + " : ");
         Integer numc = sn.nextInt();
-        Integer maxsimbolos = (nume)*(nume) + nume + 1;
+        Integer maxsimbolos = (nume-1)*(nume-1) + nume-1 + 1+1;
 
-        for(Integer i = 0; i< maxsimbolos; i++){
+        for(Integer i = 0; i< 7; i++){
             System.out.println("ingrese el" + " " + (Integer.toString(i+1))+ " " + "simbolo que quiere en su mazo: ");
             String simb= sn.next();
             simbolos.add(simb);
@@ -120,7 +117,7 @@ public class Menu {
     do{
         System.out.println("Elije una opción: ");
         System.out.println("1. Hacer una jugada: ");
-        System.out.println("\n 2. salir");
+        System.out.println("2. salir");
         int opcionaux = s.nextInt();
         switch(opcionaux){
             case 1:
@@ -134,17 +131,21 @@ public class Menu {
                     case 1:
                        System.out.println("LAS CARTAS EN EL AREA SON: " + game.area.areat_string());;
                        Scanner sn = new Scanner(System.in);
-                       System.out.println("Cual es el simbolo en comun: ");
+                       System.out.println("Cual es el simbolo en comun: " + "\n");
                        String elemento = sn.next();
                        game.spotit(elemento);
                        System.out.println(game.toString());
+                       if(game.area.getArea().isEmpty()){
+                           game.finish();
+                           sal = true;
+                       }
                        
                        break;
                     case 2: 
                         System.out.println(game.area.areat_string());
                         game.pass();
                         System.out.println(game.toString());
-
+                        sal = true;
                         break;
                     case 3:
                         System.out.println(game.area.areat_string());
@@ -155,6 +156,7 @@ public class Menu {
                         break;
                     case 4:
                         sal=true;
+                        break;
                 }
                 
                 break;
@@ -163,6 +165,75 @@ public class Menu {
                 break;
         }
         
+    }while(!sal);
+    }
+    
+    private Game modocpu(){
+        Scanner sn = new Scanner(System.in);
+        Areajuego a1 = new Areajuego();
+        Game g = new Game(2, cs, a1, "iniciado", "");
+        System.out.println("Cual es tu nombre: ");
+        String nombrej= sn.next();
+        Jugador j = new Jugador(nombrej);
+        Jugador cpu = new Jugador("cpu");
+        g.register(j);
+        g.register(cpu);
+        return g;
+    }
+    
+    private void menucpu(){
+        boolean sal = false;
+    do{
+        if(game.area.getArea().isEmpty()){
+            sal = true;
+            break;
+        }
+        System.out.println("Que jugada quieres hacer: ");
+        System.out.println("\n 1. Spoit ");
+        System.out.println("\n 2. pass ");
+        System.out.println("\n 3. finish ");
+        System.out.println("\n 4. salir ");
+        int opcionaux = s.nextInt();
+        switch(opcionaux){
+            case 1:
+                System.out.println("LAS CARTAS EN EL AREA SON: " + game.area.areat_string());;
+                Scanner sn = new Scanner(System.in);
+                System.out.println("Cual es el simbolo en comun: " + "\n");
+                String elemento = sn.next();
+                game.spotit(elemento);
+                System.out.println(game.toString()+ "\n");
+                if(game.area.getArea().isEmpty()){
+                    game.finish();
+                    //System.out.println(game.toString());
+                    sal = true;
+                }
+                else{
+                    System.out.println("La cpu eligio: ");
+                    game.contracpu();
+                System.out.println(game.toString());
+                }
+                       
+                break;
+            case 2: 
+                System.out.println(game.area.areat_string());
+                game.pass();
+                System.out.println(game.toString()+ "\n");
+                System.out.println("La cpu eligio: ");
+                game.contracpu();
+                System.out.println(game.toString());
+
+                break;
+            case 3:
+                System.out.println(game.area.areat_string());
+                game.finish();
+                System.out.println(game.toString());
+                sal=true;
+
+                break;
+            case 4:
+               sal=true;
+               break;
+        }        
     }while(!sal);
     }
 }
