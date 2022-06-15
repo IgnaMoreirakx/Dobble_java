@@ -5,10 +5,10 @@
  */
 package ignacio_moreira_lab3;
 
-public class Jugador {
+public class Jugador implements IJugador {
     //atributos
-    String nombre;
-    Integer score;
+    private String nombre;
+    private Integer score;
 
     public Jugador(String nombre) {
         this.nombre = nombre;

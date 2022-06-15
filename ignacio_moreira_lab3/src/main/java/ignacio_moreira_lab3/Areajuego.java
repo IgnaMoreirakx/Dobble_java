@@ -14,21 +14,25 @@ public class Areajuego {
     public Areajuego() {
         
     }
-    public ArrayList agregarcartas(Cardset cs){
-        this.area.add(cs.nthcard(0));
-        this.area.add(cs.nthcard(1));
-        
-        cs.borrar_carta(cs.nthcard(0));
-        cs.borrar_carta(cs.nthcard(1));
+    protected ArrayList agregarcartas(Cardset cs){
+        if(cs.getcartas().size()>=2){
+             
+            this.area.add(cs.nthcard(0));
+            this.area.add(cs.nthcard(1));
+            cs.borrar_carta(cs.nthcard(0));
+            cs.borrar_carta(cs.nthcard(0));
+            
+            return this.area;
+        }
         return this.area;
     }
     
-    public ArrayList<Carta> eliminarcartas(){
+    protected ArrayList<Carta> eliminarcartas(){
         this.area.clear();
         return area;
     }
     
-    public String areat_string(){
+    protected String areat_string(){
         ArrayList<String> area_string = new ArrayList<>();
         for(Integer i =0; i<this.area.size(); i++){
             Carta carta1 = this.area.get(i);
@@ -38,11 +42,11 @@ public class Areajuego {
         return areaa;
     }
 
-    public ArrayList<Carta> getArea() {
+    protected ArrayList<Carta> getArea() {
         return area;
     }
     
-    public Carta obtenercarta(int i){
+    protected Carta obtenercarta(int i){
         return area.get(i);
     }
     

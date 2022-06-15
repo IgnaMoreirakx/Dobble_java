@@ -79,15 +79,15 @@ public class Menu {
         Integer numero_orden = nume-1;
         System.out.println("cuantas cartas quiere del mazo, no pueden ser mas de "+ (numero_orden*numero_orden + numero_orden +1) + " : ");
         Integer numc = sn.nextInt();
-        Integer maxsimbolos = (nume-1)*(nume-1) + nume-1 + 1+1;
+        Integer maxsimbolos = (nume-1)*(nume-1) + nume-1 + 1;
 
-        for(Integer i = 0; i< 7; i++){
+        for(Integer i = 0; i< maxsimbolos; i++){
             System.out.println("ingrese el" + " " + (Integer.toString(i+1))+ " " + "simbolo que quiere en su mazo: ");
             String simb= sn.next();
             simbolos.add(simb);
         }
 
-        Cardset cs1 = new Cardset(nume-1, numc, simbolos);
+        Cardset cs1 = new Cardset(nume, numc, simbolos);
         System.out.println("EL MAZO PARA ESTA PARTIDA ES: " + cs1.cardset_string());
         return cs1;
 
@@ -115,12 +115,14 @@ public class Menu {
     private void menujugar(){
         boolean sal = false;
     do{
+        System.out.println("\nEl turno es de: " + game.dequieneselturno() + "\n");
         System.out.println("Elije una opción: ");
         System.out.println("1. Hacer una jugada: ");
         System.out.println("2. salir");
         int opcionaux = s.nextInt();
         switch(opcionaux){
             case 1:
+                
                 System.out.println("Que jugada quieres hacer: ");
                 System.out.println("\n 1. Spoit ");
                 System.out.println("\n 2. pass ");
@@ -145,7 +147,7 @@ public class Menu {
                         System.out.println(game.area.areat_string());
                         game.pass();
                         System.out.println(game.toString());
-                        sal = true;
+                        //sal = true;
                         break;
                     case 3:
                         System.out.println(game.area.areat_string());
@@ -236,4 +238,7 @@ public class Menu {
         }        
     }while(!sal);
     }
+        
+    
+    
 }

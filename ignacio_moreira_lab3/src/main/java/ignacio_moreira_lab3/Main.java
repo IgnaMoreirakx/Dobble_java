@@ -37,12 +37,16 @@ public class Main {
        
        Areajuego a1 = new Areajuego();
        
-       Jugador j1 = new Jugador("ignacio");
-       Jugador j2 = new Jugador("fenia");
-       Jugador j3 = new Jugador("esperanza");
+       
        
        Game g1 = new Game(3, cs1, a1, "iniciado", "bb");
+       Jugador j1 = new Jugador("ignacio");
        g1.register(j1);
+       
+       Jugador j2 = new Jugador("ignacio");
+       g1.register(j2);
+       Jugador j3 = new Jugador("esperanza");
+       //g1.register(j1);
        g1.register(j2);
        g1.register(j3);
        
@@ -58,7 +62,7 @@ public class Main {
        
        System.out.println(cs1.cardset_string());
        System.out.println(c1.cartatostring());
-       System.out.println(g1.dequieneselturno());
+       //System.out.println(g1.dequieneselturno());
        System.out.println(g1.toString());
     }
 }

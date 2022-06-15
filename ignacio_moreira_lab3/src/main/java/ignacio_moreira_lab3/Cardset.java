@@ -8,17 +8,18 @@ package ignacio_moreira_lab3;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Cardset {
-    int E;
-    ArrayList<String> simbolos;
-    ArrayList <Carta> cartas = new ArrayList<>();
-    
+public class Cardset implements ICardset  {
+    private int E;
+    public ArrayList<String> simbolos;
+    private ArrayList <Carta> cartas = new ArrayList<>();
     public Cardset(int E, int C, ArrayList<String> simbolos) {
         this.E = E;
+        Integer n = E-1;
+        this.simbolos = simbolos;
         ArrayList<Integer> c1aux = new ArrayList<>();
         Carta primeracarta = new Carta();
         int i, j, k;
-        for (i = 1; i<= E+1; i++) {
+        for (i = 1; i<= n+1; i++) {
             String aux = simbolos.get(i);
             primeracarta.getcarta().add(aux);
 
@@ -26,30 +27,32 @@ public class Cardset {
         cartas.add(primeracarta);
 
         
-        for (j=1; j<=E; j++) {
+        for (j=1; j<=n; j++) {
             Carta ncartas = new Carta();
             ncartas.getcarta().add(simbolos.get(1));
     
-            for (k=1; k<=E; k++) {
-                String aux2 = simbolos.get(E * j + (k+1));
+            for (k=1; k<=n; k++) {
+                String aux2 = simbolos.get(n * j + (k+1));
                 ncartas.getcarta().add(aux2);
             }
             cartas.add(ncartas);
 
             //ncartas.getcarta().clear();
         }
-        for (i= 1; i<=E; i++) {
-            for (j=1; j<=E; j++){
+        for (i= 1; i<=n; i++) {
+            for (j=1; j<=n; j++){
                 Carta nncartas = new Carta();
                 nncartas.getcarta().add(simbolos.get(i+1));
-                for (k=1; k<= E; k++) {
-                    nncartas.getcarta().add(simbolos.get(E+2+E*(k-1)+(((i-1)*(k-1)+j-1)%E)));
+                for (k=1; k<= n; k++) {
+                    nncartas.getcarta().add(simbolos.get(n+2+n*(k-1)+(((i-1)*(k-1)+j-1)%n)));
                 }
                 cartas.add(nncartas);
 
                 //nncartas.getcarta().clear();
             }
         }
+        ArrayList<Carta> cartas_finales_aux = new ArrayList<>();
+        cartas_finales_aux = cartas;
         ArrayList<Carta> cartas_finales= new ArrayList<>();
         for (i= 0; i<C; i++){
             cartas_finales.add(cartas.get(i));
@@ -75,21 +78,10 @@ public class Cardset {
         return this.cartas.size();
     }
     
-    public void borrar_carta(Carta n){
+    protected void borrar_carta(Carta n){
         this.cartas.remove(n);
     }
     
-  /*
-    public void missingcard(Cardset cs1){
-        Carta c1 = cs1.nthcard(1);
-        Integer largo = c1.largo() - 1;
-        Cardset cs2 = new Cardset(largo, (largo-1 + largo-1 +largo-1 +1, simbolos);
-        for(Integer i = 0; i < cs2.numcard(); i++){
-            cs2.borrar_carta(cs1.nthcard(i));
-        }
-    }
-*/
-
     
      public String cardset_string(){
         ArrayList<String> carta_string = new ArrayList<>();
@@ -114,7 +106,29 @@ public class Cardset {
      
      
      public boolean isdobble(){
-       return isPrime(E) & !serepite();          
+         Integer n = E-1;
+       ArrayList<String> aux = new ArrayList<>();
+         for(Integer i = 0; i < cartas.size(); i++){
+             for(Integer j = i +1; j < cartas.size(); j++){
+                 aux = cartas.get(i).encomun(cartas.get(j));
+                 if(aux.size() > 1){
+                     return true;
+                 }
+                 else{
+                     aux.clear();
+                 }
+             }
+         }
+         boolean serepite = !(aux.isEmpty());
+         if(n ==2) return true;
+        if (n%2==0) return false;
+        
+        for(int i=3;i*i<=n;i+=2) {
+            if(n%i==0)
+                return false;
+        }
+        boolean primo = true;
+        return primo & !serepite();
      }
 
 

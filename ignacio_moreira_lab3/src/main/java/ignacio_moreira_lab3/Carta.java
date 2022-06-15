@@ -3,7 +3,7 @@ package ignacio_moreira_lab3;
 import java.util.ArrayList;
 
 
-public class Carta {
+public class Carta implements ICarta {
     ArrayList<String> carta = new ArrayList<>();
     //constructor
     public Carta() {
@@ -28,14 +28,6 @@ public class Carta {
         return this.carta.size();
     }
     
-    public ArrayList<String> transformar(ArrayList<String> simbolos, ArrayList<Integer> numeros){
-        ArrayList aux = new ArrayList<> ();
-        for(Integer i =0; i<this.carta.size(); i++){
-            Integer cambio = numeros.get(i);
-            aux.add(simbolos.get(cambio));
-        }
-        return aux;
-    }
     
     public String cartatostring(){
         ArrayList<String> carta_string = new ArrayList<>();         //se crea arreglo vacio
@@ -61,5 +53,7 @@ public class Carta {
         }
         return resultado;
     }
+    
+    
            
 }

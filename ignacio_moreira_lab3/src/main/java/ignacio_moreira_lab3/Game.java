@@ -11,15 +11,15 @@ import java.util.Random;
 
 
 
-public class Game {
+public class Game implements IGame {
     //atributos
-    Integer num_jugadores;
-    ArrayList<Jugador>jugadores;
-    Cardset mazo;
-    Areajuego area;
-    String estado;
-    String modo;
-    String resultado;
+    private Integer num_jugadores;
+    private ArrayList<Jugador>jugadores;
+    protected Cardset mazo;
+    protected Areajuego area;
+    private String estado;
+    protected String modo;
+    private String resultado;
 
 
     public Game(Integer num_jugadores, Cardset mazo, Areajuego area, String estado, String modo) {
@@ -33,6 +33,11 @@ public class Game {
     }
     public void register(Jugador j){
         if(num_jugadores > 0){
+            for(Integer i = 0; i < jugadores.size(); i++){
+                if(jugadores.get(i).equals(j)){
+                    jugadores = null;
+                }
+            }
             jugadores.add(j);
             num_jugadores = num_jugadores -1;
         }
