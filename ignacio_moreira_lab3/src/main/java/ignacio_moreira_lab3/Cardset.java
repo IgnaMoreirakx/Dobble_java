@@ -8,11 +8,15 @@ package ignacio_moreira_lab3;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Cardset implements ICardset  {
+public class Cardset implements ICardset {
     private int E;
+    private int C;
     public ArrayList<String> simbolos;
     private ArrayList <Carta> cartas = new ArrayList<>();
+    private ArrayList <Carta> cartas_aux = new ArrayList<>();
+    
     public Cardset(int E, int C, ArrayList<String> simbolos) {
+        this.C = C;
         this.E = E;
         Integer n = E-1;
         this.simbolos = simbolos;
@@ -51,6 +55,7 @@ public class Cardset implements ICardset  {
                 //nncartas.getcarta().clear();
             }
         }
+        cartas_aux = cartas;
         ArrayList<Carta> cartas_finales_aux = new ArrayList<>();
         cartas_finales_aux = cartas;
         ArrayList<Carta> cartas_finales= new ArrayList<>();
@@ -83,6 +88,20 @@ public class Cardset implements ICardset  {
     }
     
     
+    public Cardset missingcards(){
+        Cardset cs1 = new Cardset(0,0, simbolos);
+        for(Integer i =0; i<cartas.size();i++){
+            if(cartas_aux.contains(cartas.get(i))){
+                cartas_aux.remove(cartas.get(i));
+            }
+        }
+        for(Integer i = 0; i<cartas_aux.size();i++){
+            cs1.getcartas().add(cartas_aux.get(i));
+        }
+        return cs1;
+    }
+    
+    
      public String cardset_string(){
         ArrayList<String> carta_string = new ArrayList<>();
         for(Integer i =0; i<this.cartas.size(); i++){
@@ -93,17 +112,25 @@ public class Cardset implements ICardset  {
         return cartaa;
     }
      
-     public Boolean equals(Cardset cs1){
+     public boolean equals(Cardset cs1){
          for(Integer i = 0; i<cartas.size();i++){
-             if(cartas.get(i).equals(cs1.getcartas().get(i)));
-             else{
+             if(!cs1.contains(cartas.get(i))){
                  return false;
              }
          }
-         Boolean resultado = simbolos.equals(cs1.getsimbolos()) & cartas.size() == cs1.getcartas().size();
+         Boolean resultado = simbolos.equals(cs1.getsimbolos()) && cartas.size() == cs1.getcartas().size();
         return resultado; 
      }
-     
+    
+    public Boolean contains(Carta c1){
+        for(Integer i = 0; i< cartas.size(); i++){
+            if(cartas.get(i).equals(c1)){
+                return true;
+            }
+        }
+        return false;
+    } 
+
      
      public boolean isdobble(){
          Integer n = E-1;
@@ -128,35 +155,6 @@ public class Cardset implements ICardset  {
                 return false;
         }
         boolean primo = true;
-        return primo & !serepite();
+        return primo & !serepite;
      }
-
-
-     
-     public boolean serepite(){
-         ArrayList<String> aux = new ArrayList<>();
-         for(Integer i = 0; i < cartas.size(); i++){
-             for(Integer j = i +1; j < cartas.size(); j++){
-                 aux = cartas.get(i).encomun(cartas.get(j));
-                 if(aux.size() > 1){
-                     return true;
-                 }
-                 else{
-                     aux.clear();
-                 }
-             }
-         }
-         return !(aux.isEmpty());
-     }
-     
-    boolean isPrime(int n) {
-        if(n ==2) return true;
-        if (n%2==0) return false;
-        
-        for(int i=3;i*i<=n;i+=2) {
-            if(n%i==0)
-                return false;
-        }
-        return true;
-    }
 }

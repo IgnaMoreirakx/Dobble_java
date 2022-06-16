@@ -13,7 +13,7 @@ public interface ICardset {
     public Carta nthcard(Integer n);
     public Integer numcard();
     public boolean isdobble();
+    public Cardset missingcards();
     public String cardset_string();
-    public Boolean equals(Cardset cs1);
-    
+    public boolean equals(Cardset cs1);
 }

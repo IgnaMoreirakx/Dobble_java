@@ -155,4 +155,8 @@ public class Game implements IGame {
         return jugadoresstring + "\r\nNUMERO DE CARTAS EN EL MAZO: " + cantidad_cartas + "\r\nCARTAS SOBRE EL AREA: " + area2 + "\r\nESTADO: " + estado + "\r\nMODO: " + modo + "\r\n" +resultado ;
     }
     
+    public boolean Equals(Game g){
+        return num_jugadores.equals(g.num_jugadores) && mazo.equals(g.mazo) && jugadores.equals(g.jugadores) && estado.equals(g.estado);
+    }
+    
 }
