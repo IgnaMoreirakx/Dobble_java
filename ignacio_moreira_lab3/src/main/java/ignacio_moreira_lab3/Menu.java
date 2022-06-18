@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase encargada de establecer la conexión entre los usuarios y el programa.
+ * 
+ * @Author Ignacio Moreira.
  */
 package ignacio_moreira_lab3;
 
@@ -9,12 +9,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+
 public class Menu {
+    /**
+     * Representa el mazo que construirá el usuario que utilice el programa.
+     */
     Cardset cs;
+    
+    /**
+     * Representa el juego que tendrá los atributos que el usuario desee.
+     */
     Game game;
+    
+    /**
+     * Permite obtener las respuestas del usuario.
+     */
     Scanner s = new Scanner(System.in);
+    
+    /**
+     * Permite saber cuando el usuario quiera salir del programa.
+     */
     private boolean salir = false;
 
+    
+    /**
+     * Encargadada de mostrar las opciones principales al usuario
+     */
     private void mostraropciones(){
         System.out.println("Bienvenido a Dobblegame\n");
         System.out.println("Elija una opcion: \n");
@@ -22,6 +42,9 @@ public class Menu {
         System.out.println("2. salir\n");
     }
     
+    /**
+     * Método para que el menú sea mostrado al usuario.
+     */
     public void run(){
         while(!salir){
             mostraropciones();
@@ -29,6 +52,12 @@ public class Menu {
         }
     }
     
+    /**
+     * Recoge las opciones que entrega el usuario
+     * Consta de sub-menús, donde el primero
+     * le permite al usuario construir su mazo, luego el usuario decide los parametros del juego,
+     * o bien puede elegir jugar contra la cpu.
+     */
     private void leeropciones(){
         System.out.println("Elija una opcion: \n");
         int opcion = s.nextInt();
@@ -70,6 +99,11 @@ public class Menu {
         }
     }
     
+    /**
+     * Se encarga guardar los parametros escogidos por el usuario y 
+     * asi poder crear el mazo para la partida.
+     * @return Mazo con el que se jugará, tipo de dato Cardset.
+     */
     private Cardset crearmazo(){
         Scanner sn = new Scanner(System.in);
         ArrayList<String> simbolos = new ArrayList<>();
@@ -93,6 +127,10 @@ public class Menu {
 
     }
     
+    /**
+     * Se encarga de recibir los parametros del usuario para crear la partida a su gusto.
+     * @return estructura de la partida de juego, tipo de dato Game.
+     */
     private Game crearpartida(){
         Areajuego a1 = new Areajuego();
         Scanner sn = new Scanner(System.in);
@@ -112,6 +150,11 @@ public class Menu {
         return g;
     }
     
+    /**
+     * Corresponde a las opciones de jugadas principalmente,
+     * con esto el usuario podrá siempre que jugada hacer 
+     * cada vez después de una jugada se muestra el game actual.
+     */
     private void menujugar(){
         boolean sal = false;
     do{
@@ -170,6 +213,11 @@ public class Menu {
     }while(!sal);
     }
     
+    /**
+     * Corresponde a asociar al usuario al juego y a la cpu a la misma partida
+     * e inicar la partida automaticamente.
+     * @return Game.
+     */
     private Game modocpu(){
         Scanner sn = new Scanner(System.in);
         Areajuego a1 = new Areajuego();
@@ -182,7 +230,11 @@ public class Menu {
         g.register(cpu);
         return g;
     }
-    
+    /**
+     * Corresponde A las opciones que se tiene al eligir el modo contra la cpu,
+     * este menú siempre le pregunta al usuario que jugada quiere hacer,
+     * por otro lada siempre muestra la opción escogida por la cpu.
+     */
     private void menucpu(){
         boolean sal = false;
     do{
